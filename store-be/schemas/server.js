@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { connectionDB } = require("../database/config");
-
+const auth = require('../routes/auth')
 class Server {
   constructor() {
     this.app = express();
@@ -9,6 +9,8 @@ class Server {
     this.usersPath = "/api/store";
     //conection DB
     this.connectionDB();
+    this.middlewares();
+    this.router();
   }
 
   async connectionDB() {
@@ -22,7 +24,11 @@ class Server {
     this.app.use(cors());
     //Parsing of body
     this.app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.urlencoded({ extended: true }));
+  }
+
+  router() {
+    this.app.use('/api/auth', auth)
   }
 
   listen() {
