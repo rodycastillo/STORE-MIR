@@ -3,7 +3,7 @@
     <div>
       <h1>Login</h1>
       <hr />
-      <b-form @submit="signUp" class="form">
+      <b-form @submit="signIn" class="form">
         <b-form-group
           id="input-group-1"
           label="Email address:"
@@ -14,7 +14,6 @@
             v-model="form.email"
             type="email"
             placeholder="Enter email"
-            required
           ></b-form-input>
         </b-form-group>
         <b-form-group id="input-group-2" label="Password:" label-for="input-2">
@@ -23,13 +22,17 @@
             v-model="form.password"
             type="password"
             placeholder="Enter Password"
-            required
           ></b-form-input>
         </b-form-group>
         <b-button type="submit" variant="primary" class="mt-3 text-center"
           >Login</b-button
         >
       </b-form>
+    </div>
+    <div>
+      <b-button @click="logout" variant="danger" class="mt-3 text-center"
+        >logou</b-button
+      >
     </div>
   </b-container>
 </template>
@@ -46,10 +49,14 @@ export default {
     };
   },
   methods: {
-    signUp() {
-      alert(JSON.stringify(this.form));
-      this.form.email = "";
-      this.form.password = "";
+    signIn() {
+      const { email, password } = this.form;
+      console.log({ email, password });
+      this.$store.dispatch("signIn", { email, password });
+    },
+    logout() {
+      console.log("signOut");
+      this.$store.dispatch("signOut");
     },
   },
 };
