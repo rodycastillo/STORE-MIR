@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const { connectionDB } = require("../database/config");
 const auth = require('../routes/auth')
+const cite = require('../routes/cite')
+const upload = require('../routes/upload')
+
 class Server {
   constructor() {
     this.app = express();
@@ -29,6 +32,8 @@ class Server {
 
   router() {
     this.app.use('/api/auth', auth)
+    this.app.use('/api/cite', cite)
+    this.app.use('/api/upload', upload)
   }
 
   listen() {
