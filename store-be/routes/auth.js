@@ -17,20 +17,25 @@ router.post("/signup", async (req, res) => {
     const user = await userNew.save();
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ status: false, message: error });
   }
 });
 
 router.post("/signin", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json({ message: "Wrong password or username!" });
+    !user &&
+      res
+        .status(401)
+        .json({ status: false, message: "Wrong password or username!" });
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const pass = bytes.toString(CryptoJS.enc.Utf8);
 
     pass !== req.body.password &&
-      res.status(401).json({ message: "Wrong password or username!" });
+      res
+        .status(401)
+        .json({ status: false, message: "Wrong password or username!" });
 
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
