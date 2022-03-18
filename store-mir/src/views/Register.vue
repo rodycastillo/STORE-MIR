@@ -1,9 +1,17 @@
 <template>
   <b-container>
     <div>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <hr />
-      <b-form @submit="signIn" class="form">
+      <b-form @submit="signUp" class="form">
+        <b-form-group id="input-group-0" label="Name:" label-for="input-0">
+          <b-form-input
+            id="input-0"
+            v-model="form.name"
+            type="text"
+            placeholder="Enter Name"
+          ></b-form-input>
+        </b-form-group>
         <b-form-group
           id="input-group-1"
           label="Email address:"
@@ -25,40 +33,31 @@
           ></b-form-input>
         </b-form-group>
         <b-button type="submit" variant="primary" class="mt-3 text-center"
-          >Login</b-button
+          >Register</b-button
         >
       </b-form>
-    </div>
-    <div>
-      <br />
-      <div class="w-100">
-        <router-link to="register">Register</router-link>
-      </div>
     </div>
   </b-container>
 </template>
 
 <script>
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       form: {
+        name: "",
         email: "",
         password: "",
       },
     };
   },
   methods: {
-    signIn() {
-      const { email, password } = this.form;
-      console.log({ email, password });
-      this.$store.dispatch("signIn", { email, password });
-      this.$router.replace("/");
-    },
-    logout() {
-      console.log("signOut");
-      this.$store.dispatch("signOut");
+    signUp() {
+      const { name, email, password } = this.form;
+      console.log({ name, email, password });
+      this.$store.dispatch("signUp", { name, email, password });
+      //   this.$router.replace("/login");
     },
   },
 };

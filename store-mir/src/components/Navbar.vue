@@ -6,17 +6,18 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav class="justify-content-end">
-        <b-navbar-nav>
-          <b-nav-item class="align-self-center">
+        <b-navbar-nav class="align-items-center">
+          <b-nav-item>
             <router-link to="/" class="item">Home</router-link>
           </b-nav-item>
-          <b-nav-item class="align-self-center">
-            <router-link to="/about" class="item">About</router-link>
-          </b-nav-item>
-          <b-nav-item class="align-self-center">
-            <b-button variant="primary">
-              <router-link to="/login" class="btn-login">Login</router-link>
+          <!-- <b-nav-item>
+            <router-link to="about" class="item">About</router-link>
+          </b-nav-item> -->
+          <b-nav-item>
+            <b-button variant="primary" v-if="!user">
+              <router-link to="login" class="btn-login">Login</router-link>
             </b-button>
+            <b-button variant="danger" v-else @click="logOut">Logout </b-button>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -26,6 +27,20 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      user: null,
+    };
+  },
+  // mounted() {
+  //   this.user = this.$store.state.user;
+  //   console.log(this.user, "user");
+  // },
+  methods: {
+    logOut() {
+      console.log("DEleted");
+    },
+  },
 };
 </script>
 <style lang="less">
