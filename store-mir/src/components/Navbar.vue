@@ -14,10 +14,12 @@
             <router-link to="about" class="item">About</router-link>
           </b-nav-item> -->
           <b-nav-item>
-            <b-button variant="primary" v-if="!user">
+            <b-button variant="primary" v-if="!getUser">
               <router-link to="login" class="btn-login">Login</router-link>
             </b-button>
-            <b-button variant="danger" v-else @click="logOut">Logout </b-button>
+            <b-button variant="danger" v-if="getUser" @click="logOut"
+              >Logout
+            </b-button>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -32,13 +34,16 @@ export default {
       user: null,
     };
   },
-  // mounted() {
-  //   this.user = this.$store.state.user;
-  //   console.log(this.user, "user");
-  // },
+  computed: {
+    getUser() {
+      return this.$store.state.user;
+    },
+  },
   methods: {
     logOut() {
-      console.log("DEleted");
+      this.$store.commit("DELETE_USER", null);
+      this.$router.push("/login");
+      localStorage.removeItem("token");
     },
   },
 };

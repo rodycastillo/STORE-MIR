@@ -15,9 +15,8 @@ export default new Vuex.Store({
     SET_LOGINUSER: (state, data) => {
       state.user = data;
     },
-    DELETE_USER: (state) => {
-      console.log(state.user, "state.user");
-      state.user = {};
+    DELETE_USER: (state, data) => {
+      state.user = data;
     },
   },
   actions: {
@@ -27,8 +26,9 @@ export default new Vuex.Store({
           "http://localhost:8080/api/auth/signin",
           payload
         );
-        console.log(response.data);
+        console.log(response.data.token);
         commit("SET_LOGINUSER", response.data);
+        localStorage.setItem("token", response.data.token);
       } catch ({ response }) {
         console.log(response.data.message);
       }

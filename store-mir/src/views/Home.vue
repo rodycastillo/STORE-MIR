@@ -15,11 +15,11 @@ import CardProduct from "@/components/CardProduct.vue";
 export default {
   name: "Home",
   components: { CardProduct },
-  // mounted() {
-  //   const user = this.$store.state.user;
-  //   if (!user) {
-  //     return this.$router.push("login");
-  //   }
-  // },
+  mounted() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return this.$router.push("/login");
+    }
+  },
 };
 </script>

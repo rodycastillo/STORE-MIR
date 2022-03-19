@@ -3,7 +3,7 @@
     <div>
       <h1>Register</h1>
       <hr />
-      <b-form @submit="signUp" class="form">
+      <b-form @submit.prevent="signUp" class="form">
         <b-form-group id="input-group-0" label="Name:" label-for="input-0">
           <b-form-input
             id="input-0"
@@ -55,9 +55,8 @@ export default {
   methods: {
     signUp() {
       const { name, email, password } = this.form;
-      console.log({ name, email, password });
       this.$store.dispatch("signUp", { name, email, password });
-      //   this.$router.replace("/login");
+      this.$router.push("/login");
     },
   },
 };

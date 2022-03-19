@@ -3,7 +3,7 @@
     <div>
       <h1>Login</h1>
       <hr />
-      <b-form @submit="signIn" class="form">
+      <b-form @submit.prevent="signIn" class="form">
         <b-form-group
           id="input-group-1"
           label="Email address:"
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -50,15 +51,14 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      sendData: "signIn",
+    }),
     signIn() {
       const { email, password } = this.form;
-      console.log({ email, password });
-      this.$store.dispatch("signIn", { email, password });
-      this.$router.replace("/");
-    },
-    logout() {
-      console.log("signOut");
-      this.$store.dispatch("signOut");
+      this.sendData({ email, password });
+      // debugger; // eslint-disable-line no-debugger
+      return this.$router.push({ path: "/" });
     },
   },
 };
