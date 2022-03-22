@@ -25,8 +25,8 @@
           ></b-form-input>
         </b-form-group>
         <b-button type="submit" variant="primary" class="mt-3 text-center"
-          >Login</b-button
-        >
+          >Login
+        </b-button>
       </b-form>
     </div>
     <div>
@@ -57,7 +57,6 @@ export default {
     signIn() {
       const { email, password } = this.form;
       this.sendData({ email, password });
-      // debugger; // eslint-disable-line no-debugger
       return this.$router.push({ path: "/" });
     },
   },

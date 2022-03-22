@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const { connectionDB } = require("../database/config");
-const auth = require('../routes/auth')
-const cite = require('../routes/cite')
-const upload = require('../routes/upload')
+const auth = require("../routes/auth");
+const cite = require("../routes/cite");
+const upload = require("../routes/upload");
+const product = require("../routes/product");
 
 class Server {
   constructor() {
@@ -31,9 +32,10 @@ class Server {
   }
 
   router() {
-    this.app.use('/api/auth', auth)
-    this.app.use('/api/cite', cite)
-    this.app.use('/api/upload', upload)
+    this.app.use("/api/auth", auth);
+    this.app.use("/api/cite", cite);
+    this.app.use("/api/upload", upload);
+    this.app.use("/api", product);
   }
 
   listen() {

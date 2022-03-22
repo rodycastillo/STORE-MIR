@@ -10,6 +10,7 @@ export default new Vuex.Store({
     accessToken: "",
     login: false,
     err: null,
+    data: [],
   },
   mutations: {
     SET_LOGINUSER: (state, data) => {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     DELETE_USER: (state, data) => {
       state.user = data;
+    },
+    SET_DATA: (state, data) => {
+      state.data = data;
     },
   },
   actions: {
@@ -46,6 +50,23 @@ export default new Vuex.Store({
         console.log(resp);
       } catch ({ response }) {
         console.log(response.data.message);
+      }
+    },
+    async getProducts({ commit }) {
+      try {
+        const resp = await axios.get("http://localhost:8080/api/products");
+        console.log(resp.data.data);
+        commit("SET_DATA", resp.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addProduct({ commit }, payload) {
+      try {
+        axios.post("http://localhost:8080/api/product", payload);
+        commit();
+      } catch (error) {
+        console.log(error);
       }
     },
   },

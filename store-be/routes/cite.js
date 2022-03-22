@@ -12,8 +12,10 @@ router.post("/cite", async (req, res) => {
       description,
       cite,
     });
-    newCite.save();
-    res.status(200).json({ message: "Data saved successfully", data: newCite });
+    const cite_new = await newCite.save();
+    res
+      .status(200)
+      .json({ message: "Data saved successfully", data: cite_new });
   } catch (error) {
     res.status(500).json({ message: "Dont saved cite" });
   }

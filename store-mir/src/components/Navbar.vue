@@ -1,7 +1,13 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="dark" class="mb-4">
+  <b-navbar toggleable="md" type="dark" class="mb-4 bg-black">
     <b-container>
-      <b-navbar-brand>Store MIR</b-navbar-brand>
+      <b-navbar-brand>
+        <b-img
+          :src="require('@/assets/logoNav.jpg')"
+          style="max-height: 4rem"
+          class="img-fluid"
+        ></b-img>
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -32,6 +38,7 @@ export default {
   data() {
     return {
       user: null,
+      black: "#000",
     };
   },
   computed: {
