@@ -35,6 +35,33 @@ router.get("/products", async (req, res) => {
   }
 });
 
+router.post("/products/update/:id", async (req, res) => {
+  !req.params.id &&
+    res
+      .status(500)
+      .json({ message: "Id not found, put please", status: false });
+  try {
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json({
+      message: "Product updated successfully",
+      status: true,
+      data: product,
+    });
+  } catch (error) {
+    res
+      .status(403)
+      .json({ message: "The product cannot be updated", status: false, error });
+  }
+});
+
 router.get("/products/:id", async (req, res) => {
   !req.params.id &&
     res

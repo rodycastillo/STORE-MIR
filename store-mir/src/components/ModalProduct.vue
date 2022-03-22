@@ -19,14 +19,12 @@
     ></b-img>
     <b-row>
       <b-col class="d-flex justify-content-center align-items-center">
-        <StarRating
-          :animated="true"
-          v-model="item.rating.rate"
-          :star-size="35"
-        />
+        <StarRating v-model="item.rating.rate" :star-size="35" />
       </b-col>
       <b-col class="text-center">
-        <p class="text-center py-3 mb-0">{{ formatCurrency(item.price) }}</p>
+        <p class="text-center py-3 mb-0">
+          Precio: {{ formatCurrency(item.price) }}
+        </p>
       </b-col>
     </b-row>
     <b-row class="ModalProduct__send text-center my-3">
@@ -34,7 +32,7 @@
         <b-button
           type="submit"
           pill
-          variant="warning"
+          variant="success"
           @click="toUpdate(item._id)"
           class="ModalProduct__send-button px-4 text-white mr-1"
           >Actualizar</b-button
@@ -44,10 +42,10 @@
         <b-button
           type="submit"
           pill
-          variant="warning"
+          variant="danger"
           @click="closeModal(item._id)"
           class="ml-1 ModalProduct__send-button px-4 text-white"
-          >Close</b-button
+          >Cerrar</b-button
         >
       </b-col>
     </b-row>
